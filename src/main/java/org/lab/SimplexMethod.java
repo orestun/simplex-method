@@ -66,6 +66,11 @@ public class SimplexMethod {
     }
 
     private void countRaws(double[][] table, int pivotRawIndex, int minColumnIndex){
+        calculatePivotRaw(table, pivotRawIndex, minColumnIndex);
+        calculateNonPivotRaws(table, pivotRawIndex, minColumnIndex);
+    }
+
+    private void calculatePivotRaw(double[][] table, int pivotRawIndex, int minColumnIndex){
         double pivotRawMultiplyIndex = 1 / table[pivotRawIndex][minColumnIndex];
         for(int k = 0; k < table[pivotRawIndex].length; k++){
             if(k != minColumnIndex){
@@ -74,6 +79,9 @@ public class SimplexMethod {
                 table[pivotRawIndex][k] = 1;
             }
         }
+    }
+
+    private void calculateNonPivotRaws(double[][] table, int pivotRawIndex, int minColumnIndex){
         for(int i = 0; i < table.length; i++){
             if(i != pivotRawIndex){
                 double multiplyIndex = -(table[i][minColumnIndex] / table[pivotRawIndex][minColumnIndex]);
